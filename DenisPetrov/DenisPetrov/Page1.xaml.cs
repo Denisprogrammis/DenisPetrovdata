@@ -5,21 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
-using Picker = Xamarin.Forms.Picker;
-using DatePicker = Xamarin.Forms.DatePicker;
 
-namespace elemendid
+namespace Grid_Smirnov
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class dataPicker : ContentPage
+    public partial class Ajaplaan : ContentPage
     {
-        Picker pick;
-        Editor editor;
-        DatePicker dpicker;
-
-        public dataPicker()
+        TimePicker tpicker;
+        Picker picker;
+        Entry entry;
+        public Ajaplaan()
         {
             Grid gr = new Grid
             {
@@ -28,47 +24,129 @@ namespace elemendid
 new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
 new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
 new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-
 },
                 ColumnDefinitions =
 {
-new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
-new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
+new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
 }
             };
-
-            pick = new Xamarin.Forms.Picker
+            picker = new Picker
             {
-                Title = "keeld"
+                Title = "Plaan"
             };
-            pick.Items.Add("C#");
-            pick.Items.Add("python");
-            pick.Items.Add("C++");
-            pick.Items.Add("VisualBasic");
-            pick.Items.Add("Java");
+            picker.Items.Add("Просыпаюсь");
+            picker.Items.Add("Учеба");
+            picker.Items.Add("Дома");
+            picker.Items.Add("Обед");
+            picker.Items.Add("Прогулка");
+            picker.Items.Add("Ужин");
+            picker.Items.Add("Просмотр фильма");
+            picker.Items.Add("Прогулка с собакой");
+            picker.Items.Add("Подготовка ко сну");
+            picker.Items.Add("Чтение книги");
+            picker.Items.Add("Расстелание кровати");
+            picker.Items.Add("Иду спать");
 
-            gr.Children.Add(pick, 0, 0);
-            pick.SelectedIndexChanged += Pick_SelectedIndexChanged;
+            gr.Children.Add(picker, 0, 0);
+            picker.PropertyChanged += Picker_PropertyChanged; ;
 
-            editor = new Editor { Placeholder = "vali keel" };
-
-            editor = new Editor { Placeholder = "vali keel nimekirjas" };
-            gr.Children.Add(editor, 1, 0);
-
-            dpicker = new DatePicker
+            tpicker = new TimePicker()
             {
-                Format = "D",
-                MinimumDate = DateTime.Now.AddDays(-10),
-                MaximumDate = DateTime.Now.AddDays(10),
+                //Time = new TimeSpan(18,0,0)
+                Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             };
-            gr.Children.Add(dpicker, 1, 1);
-            Content = gr;
-
         }
 
-        private void Pick_SelectedIndexChanged(object sender, EventArgs e)
+        private void Picker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            editor.Text = "TEXT" + pick.Items[pick.SelectedIndex];
+            if (e.PropertyName == TimePicker.TimeProperty.PropertyName)
+            {
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 7)
+                {
+                    entry.Text = "Просыпаюсь";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 8.30)
+                {
+                    entry.Text = "Учеба";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 16)
+                {
+                    entry.Text = "Дома";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 17)
+                {
+                    entry.Text = "Обед";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 18)
+                {
+                    entry.Text = "Прогулка";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 19)
+                {
+                    entry.Text = "Ужин";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 21)
+                {
+                    entry.Text = "Просмотр фильма";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 22)
+                {
+                    entry.Text = "Прогулка с собакой";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 23.30)
+                {
+                    entry.Text = "Подготовка ко сну";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 23.50)
+                {
+                    entry.Text = "Чтение книги";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 00)
+                {
+                    entry.Text = "Расстелание кровати";
+                }
+                //TimeSpan selctTime = tpicker.Time;
+                //entry.Text = selctTime.ToString();
+                var time = tpicker.Time.Hours;
+                if (time == 00.20)
+                {
+                    entry.Text = "Иду спать";
+                }
+            }
         }
     }
 }
