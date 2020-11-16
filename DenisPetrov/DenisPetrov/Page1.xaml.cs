@@ -7,146 +7,143 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Grid_Smirnov
+namespace Ajaplaan
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Ajaplaan : ContentPage
+    public partial class MainPage : ContentPage
     {
-        TimePicker tpicker;
-        Picker picker;
-        Entry entry;
-        public Ajaplaan()
+        Label l;
+        TimePicker timePicker;
+        Image img;
+
+
+        public MainPage()
         {
-            Grid gr = new Grid
+            Grid grd = new Grid
             {
                 RowDefinitions =
 {
-new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+new RowDefinition{Height=new GridLength(1,GridUnitType.Star)},
+new RowDefinition{Height=new GridLength(1,GridUnitType.Star)}
+
 },
                 ColumnDefinitions =
 {
-new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
+new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)},
+new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)}
 }
-            };
-            picker = new Picker
-            {
-                Title = "Plaan"
-            };
-            picker.Items.Add("Просыпаюсь");
-            picker.Items.Add("Учеба");
-            picker.Items.Add("Дома");
-            picker.Items.Add("Обед");
-            picker.Items.Add("Прогулка");
-            picker.Items.Add("Ужин");
-            picker.Items.Add("Просмотр фильма");
-            picker.Items.Add("Прогулка с собакой");
-            picker.Items.Add("Подготовка ко сну");
-            picker.Items.Add("Чтение книги");
-            picker.Items.Add("Расстелание кровати");
-            picker.Items.Add("Иду спать");
 
-            gr.Children.Add(picker, 0, 0);
-            picker.PropertyChanged += Picker_PropertyChanged; ;
-
-            tpicker = new TimePicker()
-            {
-                //Time = new TimeSpan(18,0,0)
-                Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             };
+            l = new Label { Text = "", TextColor = Color.Gold, BackgroundColor = Color.Red, FontSize = 50 };
+            grd.Children.Add(l, 0, 0);
+            Grid.SetColumnSpan(l, 3);
+
+            timePicker = new TimePicker() { Time = new TimeSpan(18, 1, 1) };
+            grd.Children.Add(timePicker, 2, 1);
+            timePicker.PropertyChanged += TimePicker_PropertyChanged1;
+            img = new Image { };
+            grd.Children.Add(img, 0, 1);
+            Grid.SetColumnSpan(l, 2);
+            Grid.SetColumnSpan(img, 2);
+            Content = grd;
+
+
         }
 
-        private void Picker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void TimePicker_PropertyChanged1(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == TimePicker.TimeProperty.PropertyName)
             {
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 7)
+                var time = timePicker.Time.Hours;
+                
+                 if (time == 7)
                 {
-                    entry.Text = "Просыпаюсь";
+                    l.Text = "Просыпаюсь";
+                    img.Source = FileImageSource.FromFile("a.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 8.30)
+                else if (time == 8)
                 {
-                    entry.Text = "Учеба";
+                    l.Text = "Учеба";
+                    img.Source = FileImageSource.FromFile("b.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 16)
+                else if (time == 9)
                 {
-                    entry.Text = "Дома";
+                    l.Text = "Иду домой";
+                    img.Source = FileImageSource.FromFile("c.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 17)
+                else if (time == 10)
                 {
-                    entry.Text = "Обед";
+                    l.Text = "Обедаю";
+                    img.Source = FileImageSource.FromFile("d.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 18)
+                else if (time == 11)
                 {
-                    entry.Text = "Прогулка";
+                    l.Text = "Иду гулять";
+                    img.Source = FileImageSource.FromFile("e.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 19)
+                else if (time == 12)
                 {
-                    entry.Text = "Ужин";
+                    l.Text = "Ужинаю";
+                    img.Source = FileImageSource.FromFile("f.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 21)
+                else if (time == 13)
                 {
-                    entry.Text = "Просмотр фильма";
+                    l.Text = "Смотрю телевизор";
+                    img.Source = FileImageSource.FromFile("g.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 22)
+                else if (time == 14)
                 {
-                    entry.Text = "Прогулка с собакой";
+                    l.Text = "Играю в ПК";
+                    img.Source = FileImageSource.FromFile("h.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 23.30)
+                else if (time == 15)
                 {
-                    entry.Text = "Подготовка ко сну";
+                    l.Text = "Готовлюсь ко сну";
+                    img.Source = FileImageSource.FromFile("k.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 23.50)
+                else if (time == 16)
                 {
-                    entry.Text = "Чтение книги";
+                    l.Text = "Все еще готовлюсь";
+                    img.Source = FileImageSource.FromFile("k.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 00)
+                else if (time == 17)
                 {
-                    entry.Text = "Расстелание кровати";
+                    l.Text = "Расстилаю кровать";
+                    img.Source = FileImageSource.FromFile("l.jpg");
                 }
-                //TimeSpan selctTime = tpicker.Time;
-                //entry.Text = selctTime.ToString();
-                var time = tpicker.Time.Hours;
-                if (time == 00.20)
+                else if (time == 18)
                 {
-                    entry.Text = "Иду спать";
+                    l.Text = "Смотрю фильм";
+                    img.Source = FileImageSource.FromFile("g.jpg");
+                }
+                else if (time == 19)
+                {
+                    l.Text = "Смотрю фильм";
+                    img.Source = FileImageSource.FromFile("g.jpg");
+                }
+                else if (time == 20)
+                {
+                    l.Text = "Смотрю фильм";
+                    img.Source = FileImageSource.FromFile("g.jpg");
+                }
+                else if (time == 21)
+                {
+                    l.Text = "Играю с котом";
+                    img.Source = FileImageSource.FromFile("m.jpg");
+                }
+                else if (time == 22)
+                {
+                    l.Text = "Питаюсь";
+                    img.Source = FileImageSource.FromFile("f.jpg");
+                }
+                else if (time == 23)
+                {
+                    l.Text = "ложусь спать";
+                    img.Source = FileImageSource.FromFile("m.jpg");
                 }
             }
         }
+
+
     }
 }
